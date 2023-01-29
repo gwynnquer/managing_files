@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 20 13:04:25 2022
-
-@author: dbognacki
-"""
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
@@ -50,6 +43,3 @@ if __name__ == "__main__":
     d1 = today.strftime('%Y-%m-%d')
     url = 'http://api.nbp.pl/api/exchangerates/rates/a/EUR/2022-10-01/'+d1+'?format=json'
     run_chrome(url)
-
-    
-    
