@@ -25,7 +25,7 @@ SHEET_NAMES = ['Current month', 'Previous month']
 CURRENT_DATA_INFO = f'{SHEET_NAMES[0]}, dane od {FIRST_DAY_REPORTING_MONTH} do {LAST_REPORING_DATE}'
 PREVIOUS_DATA_INFO = f'{SHEET_NAMES[1]}, dane od {FIRST_DAY_PREVIOUS_MONTH} do {LAST_DAY_PREVIOUS_MONTH}'
 
-SAMPLE_FILE = 'eastore_sample.xlsx'
+SAMPLE_FILE = 'sample.xlsx'
 
 THIN_B = openpyxl.styles.Border(left=Side(style='thin'),
                                 right=Side(style='thin'),
@@ -134,10 +134,10 @@ class ProcessExcel():
 
         return
 
-    def sent_via_outlook(self, id=None):
+    def sent_via_outlook(self, id):
         outlook = win32.Dispatch('outlook.application')
         mail = outlook.CreateItem(0)
-        mail.To = 'example.mail@example.com'
+        mail.To = f'example_{id}_.mail@example.com'
         mail.Subject = f'sometitle {LAST_REPORING_DATE}'
         mail.HTMLBody = f'''First sheet shows report from {FIRST_DAY_REPORTING_MONTH} to {LAST_REPORING_DATE}, 
             new data are at the top of the table. 
@@ -175,7 +175,7 @@ def main():
     stores = new_data['Shop'].unique()
 
     for store in stores:
-      store_df = new_data[new_data['Shop] == store]
+      store_df = new_data[new_data['Shop'] == store]
       ProcessExcel(id=shop, df=store_df)
 
 
